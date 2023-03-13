@@ -1,15 +1,19 @@
-package product.star.vbutkov;
+package ru.product.star.vbutkov;
 
-import product.star.vbutkov.service.ParticipantService;
-import product.star.vbutkov.entity.Gender;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import ru.product.star.vbutkov.config.CompetitionConfig;
+import ru.product.star.vbutkov.entity.Gender;
+import ru.product.star.vbutkov.service.ResultsProcessor;
 
 public class CompetitionMain {
     public static void main(String[] args) {
 
-        ResultsProcessor resultsProcessor = new ResultsProcessor(new ParticipantService());
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(CompetitionConfig.class);
+        var competitionProcessor = context.getBean(ResultsProcessor.class);
+        var competitionResults = competitionProcessor.readResults("resultsCompetition.csv");
+        var fastRunners = competitionProcessor.getFastRunners(competitionResults, 2, 10, Gender.M);
+        fastRunners.stream()
+                .forEach(System.out::println);
 
-        var participants = resultsProcessor.loadResultsCompetition("resultsCompetition.csv");
-
-        resultsProcessor.getFastRunners(participants, 3, 5, Gender.M);
     }
 }

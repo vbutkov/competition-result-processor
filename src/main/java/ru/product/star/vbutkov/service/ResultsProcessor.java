@@ -1,4 +1,4 @@
-package ru.product.star.vbutkov.mapper.service;
+package ru.product.star.vbutkov.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -23,7 +23,7 @@ public class ResultsProcessor {
 
     ParticipantMapper participantService;
 
-
+    @Autowired
     public ResultsProcessor(ParticipantMapper resultParticipant) {
         this.participantService = resultParticipant;
     }

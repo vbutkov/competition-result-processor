@@ -1,6 +1,4 @@
-package product.star.vbutkov.entity;
-
-import product.star.vbutkov.entity.Gender;
+package ru.product.star.vbutkov.entity;
 
 import java.time.LocalTime;
 
